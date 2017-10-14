@@ -1,5 +1,7 @@
 # Multi-Region Consul on Azure
 
+NOTE: because this project uses ARM templates to provision certain resources (see below), `terraform destroy` will not work correctly (see [here](https://www.terraform.io/docs/providers/azurerm/r/template_deployment.html) for more info). Instead, you will need to delete the entire Azure resource group, either from the portal or CLI.
+
 This objective of this project is to provide an example of a multi-region Consul cluster deployment in Azure using Terraform.  This is a high-level overview of the environment that is created:
 
 * Creates a Resource Group to contain all resources created by this guide
