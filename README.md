@@ -42,11 +42,13 @@ This objective of this project is to provide an example of a multi-region Consul
     $ source env.sh
     ```
 
-5. Finally, create a read-only Azure Service Principal (using the Azure CLI) that will be used to perform the Consul auto-join (make note of these values as you will use them later in this guide):
+5. Create a read-only Azure Service Principal (using the Azure CLI) that will be used to perform the Consul auto-join (make note of these values as you will use them later in this guide):
 
     ```
     $ az ad sp create-for-rbac --role="Reader" --scopes="/subscriptions/[YOUR_SUBSCRIPTION_ID]"
     ```
+
+6. Finally, create a Resource Group in your account that will be used to store your Packer Images. This is necessary for step 3 in the deployment steps below. I'm assuming here that the Resource Group will be named "PackerImages", though this can be whatever you like, as long as you update the Packer image creation command below with the same. This can be created in any region that you choose.
 
 ## Deployment Steps
 
@@ -74,7 +76,7 @@ On your client machine:
     $ AZURE_RESOURCE_GROUP="PackerImages" AZURE_LOCATION="westus" PACKER_ENVIRONMENT="dev" CONSUL_VERSION="0.9.3" packer build consul.json
     ```
 
-    * Do the same for the `eastus` region.
+    * Repeat the above for your second region: `AZURE_LOCATION="eastus"`
 
 4. Once the Packer build process is complete, you can output the resource ID for the new images using the Azure CLI:
 
